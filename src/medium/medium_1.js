@@ -58,6 +58,24 @@ export function getMedian(array) {
  }
  */
 export function getStatistics(array) {
+    var len = array.length
+    var su = getSum(array)
+    var me = sum/length
+    var med = getMedian(array)
+    var mi = Math.min(array)
+    var ma = Math.max(array)
+    var vari = variance(array, mean)
+    var sd = Math.sqrt(vari)
 
+    return {
+        length: len,
+        sum: su,
+        mean: me,
+        median: med,
+        min: mi,
+        max: ma,
+        variance: vari,
+        standard_deviation: sd 
+    }
 }
 

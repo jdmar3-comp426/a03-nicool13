@@ -79,8 +79,8 @@ export function countArray(array) {
     
     for (var j = 0; j < unique.length; j++) {
         for (var k = 0; k < array.length; k++) {
-            if (unique[i] == array[k]) {
-                counts[i] += 1
+            if (unique[j] == array[k]) {
+                counts[j] += 1
             }
         }
     }

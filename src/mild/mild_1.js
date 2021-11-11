@@ -70,12 +70,13 @@ export function maxAndMin(numbers) {
 export function countArray(array) {
     var unique = [] 
     for (var i = 0; i < array.length; i++) {
-        if (unique.includes(array[i],0) == false) {
+        if (unique.includes(array[i]) == false) {
             unique.push(array[i])
         }
     }
     
-    var counts = new Array(unique.length)
+    var counts = new Array(unique.length).fill(0)
+    
     for (var j = 0; j < unique.length; j++) {
         for (var k = 0; k < array.length; k++) {
             if (unique[i] == array[k]) {

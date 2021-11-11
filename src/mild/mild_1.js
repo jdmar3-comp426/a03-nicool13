@@ -84,7 +84,8 @@ export function countArray(array) {
     }
     var ans = {}
     for (var i = 0; i < counts.length; i++) {
-        Object.defineProperty(ans,String(unique[i]), {value: Number(counts[i]), enumerable: true})
+        Object.defineProperty(ans,String(unique[i]), {enumerable: true, writable: true})
+        ans[String(unique[i])] = counts[i]
     }
     return ans
 }

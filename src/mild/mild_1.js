@@ -70,7 +70,7 @@ export function maxAndMin(numbers) {
 export function countArray(array) {
     var unique = [] 
     for (var i = 0; i < array.length; i++) {
-        if (unique.includes[array[i],0] == false) {
+        if (unique.includes(array[i],0) == false) {
             unique.push(array[i])
         }
     }

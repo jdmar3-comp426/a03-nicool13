@@ -1,4 +1,5 @@
 import {variance} from "./data/stats_helpers.js";
+import { maxAndMin } from "../mild/mild_1.js";
 
 /**
  * Gets the sum of an array of numbers.
@@ -62,6 +63,7 @@ export function getStatistics(array) {
     var su = getSum(array)
     var me = su/len
     var med = getMedian(array)
+    var str = maxAndMin(array)
     var mi = str.min
     var ma = str.max
     var vari = variance(array, me)

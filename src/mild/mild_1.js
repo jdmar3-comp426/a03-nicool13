@@ -82,7 +82,7 @@ export function countArray(array) {
             }
         }
     }
-    var ans = []
+    var ans = new Array(counts.length)
     for (var i = 0; i < counts.length; i++) {
         ans[String(unique[i])] = Number(counts[i])
     }

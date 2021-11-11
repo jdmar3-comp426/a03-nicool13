@@ -62,8 +62,6 @@ export function getStatistics(array) {
     var su = getSum(array)
     var me = su/len
     var med = getMedian(array)
-    import { maxAndMin } from "../mild/mild_1.js";
-    str = maxAndMin(array)
     var mi = str.min
     var ma = str.max
     var vari = variance(array, me)

@@ -69,7 +69,7 @@ export function removeKey(object, key) {
  */
 export function removeKeyNonDestructive(object, key) {
    var tmp  = object
-   tmp.removeKey(tmp, key)
+   removeKey(tmp, key)
    return tmp
 
 }

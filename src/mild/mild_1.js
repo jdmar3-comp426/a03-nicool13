@@ -84,7 +84,7 @@ export function countArray(array) {
     }
     var ans
     for (var i = 0; i < counts.length; i++) {
-        ans[unique[i]] = counts[i]
+        ans[String(unique[i])] = Number(counts[i])
     }
     return ans
 }

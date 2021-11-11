@@ -68,7 +68,7 @@ export function removeKey(object, key) {
  If only `removeKeyNonDestructive` was called, nothing would have changed.
  */
 export function removeKeyNonDestructive(object, key) {
-   var tmp  = object
+   var tmp  = Object.assign({}, object)
    removeKey(tmp, key)
    return tmp
 

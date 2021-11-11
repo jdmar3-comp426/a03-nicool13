@@ -60,11 +60,11 @@ export function getMedian(array) {
 export function getStatistics(array) {
     var len = array.length
     var su = getSum(array)
-    var me = sum/length
+    var me = su/len
     var med = getMedian(array)
     var mi = Math.min(array)
     var ma = Math.max(array)
-    var vari = variance(array, mean)
+    var vari = variance(array, me)
     var sd = Math.sqrt(vari)
 
     return {

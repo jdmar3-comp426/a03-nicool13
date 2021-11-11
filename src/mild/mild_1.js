@@ -1,3 +1,5 @@
+
+
 /**
  *
  * @param {number} a
@@ -10,7 +12,6 @@
  */
 export function sumToString(a, b) {
     let str = "'" + a + " + " + b + " = (" + a+b + ")'"
-    print(str)
     return str
 }
 

@@ -12,7 +12,7 @@
  */
 export function sumToString(a, b) {
     var sum = a+b
-    var str = "'" + a + " + " + b + " = (" + sum + ")'"
+    var str = a + " + " + b + " = " + sum
     return str
 }
 
@@ -53,7 +53,7 @@ export function maxAndMin(numbers) {
             mini = numbers[i]
         } 
     }
-    var ans = {min: mini, max: maxi}
+    var ans = {max: maxi, min: mini}
     return ans
 }
 
@@ -68,5 +68,13 @@ export function maxAndMin(numbers) {
  *
  */
 export function countArray(array) {
-    
+    var counts
+    for (var i = 0; i < array.length; i++) {
+        if (counts.hasOwnProperty(array[i])) {
+            counts[array[i]] += 1
+        } else {
+            counts[array[i]] = 1
+        }
+    }
+    return counts
 }

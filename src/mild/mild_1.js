@@ -53,7 +53,7 @@ export function maxAndMin(numbers) {
             mini = numbers[i]
         } 
     }
-    var ans = {max: maxi, min: mini}
+    var ans = {max: Number(maxi), min: Number(mini)}
     return ans
 }
 
@@ -68,13 +68,23 @@ export function maxAndMin(numbers) {
  *
  */
 export function countArray(array) {
-    var counts
+    var unique = [] 
     for (var i = 0; i < array.length; i++) {
-        if (counts.hasOwnProperty(array[i])) {
-            counts[array[i]] += 1
-        } else {
-            counts[array[i]] = 1
+        if (unique.includes[array[i]] == false) {
+            unique.push(array[i])
         }
     }
-    return counts
+    var counts = new Array(unique.length)
+    for (var j = 0; j < unique.length; j++) {
+        for (var k = 0; k < array.length; k++) {
+            if (unique[i] == array[k]) {
+                counts[i] += 1
+            }
+        }
+    }
+    var ans
+    for (var i = 0; i < counts.length; i++) {
+        ans[unique[i]] = counts[i]
+    }
+    return ans
 }

@@ -74,7 +74,7 @@ export function countArray(array) {
             unique.push(array[i])
         }
     }
-    return unique
+    
     var counts = new Array(unique.length)
     for (var j = 0; j < unique.length; j++) {
         for (var k = 0; k < array.length; k++) {
@@ -83,12 +83,12 @@ export function countArray(array) {
             }
         }
     }
-    return counts
+    
     var ans = {}
     for (var i = 0; i < counts.length; i++) {
         key = String(unique[i])
         Object.defineProperty(ans, key, {enumerable: true, writable: true})
         ans.key = counts[i]
     }
-    //return ans
+    return ans
 }

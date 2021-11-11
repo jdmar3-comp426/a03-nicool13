@@ -82,11 +82,12 @@ export function countArray(array) {
             }
         }
     }
+    return counts
     var ans = {}
     for (var i = 0; i < counts.length; i++) {
         key = String(unique[i])
         Object.defineProperty(ans, key, {enumerable: true, writable: true})
         ans.key = counts[i]
     }
-    return ans
+    //return ans
 }

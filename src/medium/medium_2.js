@@ -149,7 +149,7 @@ function getRatio() {
  */
 export const moreStats = {
     makerHybrids: getHybrids(),
-    avgMpgByYearAndHybrid: undefined
+    avgMpgByYearAndHybrid: getAvgMpgByYearAndHybrid()
 };
 
 function getHybrids() {
@@ -199,6 +199,15 @@ function getAvgMpgByYearAndHybrid() {
             }
         }
     }
-    
+    years.prototype.forEach(
+        makeaverages(this) 
+    )
+    return years
 }
 
+function makeaverages(year) {
+    year.hybrid.city = year.hybrid.city / hybs
+    year.hybrid.highway = year.hybrid.highway / hybs
+    year.notHybrid.city = year.notHybrid.city / nonhybs
+    year.notHybrid.highway = year.notHybrid.highway / nonhybs
+}

@@ -1,5 +1,6 @@
 import mpg_data from "./data/mpg_data.js";
 import {getStatistics} from "./medium_1.js";
+import { maxAndMin } from "../mild/mild_1.js";
 
 /*
 This section can be done by using the array prototype functions.
@@ -150,3 +151,35 @@ export const moreStats = {
     makerHybrids: undefined,
     avgMpgByYearAndHybrid: undefined
 };
+
+function getHybrids() {
+    var makes = []
+    var models = []
+    for(var i = 0; i < mpg_data.length; i++) {
+        if(mpg_data[i].hybrid) {
+            if(makes.includes(mpg_data[i].make)) {
+                models[makes.indexOf(mpg_data[i].make)].push(mpg_data[i].id)
+            } else {
+                makes.push(mpg_data[i].make)
+                models[makes.indexOf(mpg_data[i].make)].push(mpg_data[i].id)
+            }
+        }
+    }
+    return models
+    var orderedMakes = []
+    while (true) {
+        var i = 1
+        while(i < makes.length) {
+            var maxi = makes[0][1]
+            var maxidx = 0
+            if (makes[i][1] > maxi) {
+                maxi = makes[i][1]
+                maxidx = i
+            }
+            i++
+        }
+        //orderedMakes[orderedMakes.length] = {make: } 
+    }
+    
+    
+}

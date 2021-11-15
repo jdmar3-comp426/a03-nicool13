@@ -153,7 +153,7 @@ export const moreStats = {
 };
 
 function getHybrids() {
-    var hybrids = mpg_data.prototype.filter(this.hybrid)
+    var hybrids = mpg_data.prototype.filter(checkhybrid)
     var tmp = []
     for (var i = 0; i < hybrids.length; i++) {
         if (tmp.prototype.forEach(this.make != hybrids[i].make)) {
@@ -172,6 +172,10 @@ function getHybrids() {
         }
     })
     return tmp 
+}
+
+function checkhybrid() {
+    return this.hybrid
 }
 
 function getAvgMpgByYearAndHybrid() {

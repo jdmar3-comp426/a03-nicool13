@@ -148,38 +148,57 @@ function getRatio() {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
+    makerHybrids: getHybrids(),
     avgMpgByYearAndHybrid: undefined
 };
 
 function getHybrids() {
-    var makes = []
-    var models = []
-    for(var i = 0; i < mpg_data.length; i++) {
-        if(mpg_data[i].hybrid) {
-            if(makes.includes(mpg_data[i].make)) {
-                models[makes.indexOf(mpg_data[i].make)].push(mpg_data[i].id)
+    var hybrids = mpg_data.prototype.filter(this.hybrid)
+    var tmp = []
+    for (var i = 0; i < hybrids.length; i++) {
+        if (tmp.prototype.forEach(this.make != hybrids[i].make)) {
+            var ids = [hybrids[i].id]
+            tmp.push({make: hybrids[i].make, hybrids: ids})
+        } else {
+            idx = tmp.prototype.findIndex(this.make == hybrids[i].make)
+            tmp[idx].hybrids.push(hybrids[i].id)
+        }
+    }
+    tmp.sort(function(a, b) {
+        if (a.hybrids.length > b.hybrids.length) {
+            return -1
+        } else {
+            return 1
+        }
+    })
+    return tmp 
+}
+
+function getAvgMpgByYearAndHybrid() {
+    var years = new Object()
+    var hybs = 0
+    var nonhybs = 0
+    for (var i = 0; i < mpg_data; i++) {
+        if (years.hasOwnProperty(mpg_data[i].year)) {
+            if (mpg_data[i].hybrid) {
+                hybs += 1
+                years[mpg_data[i].year].hybrid.city += mpg_data[i].city_mpg
+                years[mpg_data[i].year].hybrid.highway += mpg_data[i].highway_mpg
             } else {
-                makes.push(mpg_data[i].make)
-                models[makes.indexOf(mpg_data[i].make)].push(mpg_data[i].id)
+                nonhybs += 1
+                years[mpg_data[i].year].notHybrid.city += mpg_data[i].city_mpg
+                years[mpg_data[i].year].notHybrid.highway += mpg_data[i].highway_mpg
+            }
+        } else {
+            if (mpg_data[i].hybrid) {
+                hybs += 1
+                years[mpg_data[i].year] = {hybrid: {city: mpg_data[i].city_mpg, highway: mpg_data[i].highway_mpg}, notHybrid: {city: 0, highway: 0}}
+            } else {
+                nonhybs += 1
+                years[mpg_data[i].year] = {hybrid: {city: 0, highway: 0}, notHybrid: {city: mpg_data[i].city_mpg, highway: mpg_data[i].highway_mpg}}
             }
         }
     }
-    return models
-    var orderedMakes = []
-    while (true) {
-        var i = 1
-        while(i < makes.length) {
-            var maxi = makes[0][1]
-            var maxidx = 0
-            if (makes[i][1] > maxi) {
-                maxi = makes[i][1]
-                maxidx = i
-            }
-            i++
-        }
-        //orderedMakes[orderedMakes.length] = {make: } 
-    }
-    
     
 }
+

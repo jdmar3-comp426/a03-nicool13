@@ -20,7 +20,8 @@ see under the methods section
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
 export const allCarStats = {
-    avgMpg: undefined,
+    avgMpg: getAvgMpg(),
+    /*
     get avgMpg() {
         var citySum = 0
         var hwaySum = 0
@@ -30,9 +31,11 @@ export const allCarStats = {
         }
         var cityavg = citySum / mpg_data.length
         var hwayavg = hwaySum / mpg_data.length
-        return (cityavg+hwayavg)/2
+        return {city: cityavg, highway: hwayavg}
     },
-    allYearStats: undefined,
+    */
+    allYearStats: getYearStats(),
+    /*
     get allYearStats() {
         var years = []
         for (var i = 0; i < mpg_data.length; i++) {
@@ -40,7 +43,9 @@ export const allCarStats = {
         }
         return getStatistics(years)
     },
-    ratioHybrids: undefined,
+    */
+    ratioHybrids: getRatio(),
+    /*
     get ratioHybrids() {
         var numHyb = 0
         for (var i = 0; i < mpg_data.length; i++) {
@@ -50,10 +55,38 @@ export const allCarStats = {
         }
         return numHyb/mpg_data.length
     }
-
+    */
 };
 
+function getAvgMpg() {
+    var citySum = 0
+        var hwaySum = 0
+        for (var i = 0; i < mpg_data.length; i++) {
+            citySum += mpg_data[i].city_mpg
+            hwaySum += mpg_data[i].highway_mpg
+        }
+        var cityavg = citySum / mpg_data.length
+        var hwayavg = hwaySum / mpg_data.length
+        return {city: cityavg, highway: hwayavg}
+}
 
+function getYearStats() {
+    var years = []
+        for (var i = 0; i < mpg_data.length; i++) {
+            years.push(mpg_data[i].year)
+        }
+        return getStatistics(years)
+}
+
+function getRatio() {
+    var numHyb = 0
+        for (var i = 0; i < mpg_data.length; i++) {
+            if(mpg_data[i].hybrid) {
+                numHyb += 1
+            }
+        }
+        return numHyb/mpg_data.length
+}
 
 
 /**

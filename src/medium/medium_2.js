@@ -21,9 +21,39 @@ see under the methods section
  */
 export const allCarStats = {
     avgMpg: undefined,
+    get avgMpg() {
+        var citySum = 0
+        var hwaySum = 0
+        for (var i = 0; i < mpg_data.length; i++) {
+            citySum += mpg_data[i].city_mpg
+            hwaySum += mpg_data[i].highway_mpg
+        }
+        var cityavg = citySum / mpg_data.length
+        var hwayavg = hwaySum / mpg_data.length
+        return (cityavg+hwayavg)/2
+    },
     allYearStats: undefined,
+    get allYearStats() {
+        var years = []
+        for (var i = 0; i < mpg_data.length; i++) {
+            years.push(mpg_data[i].year)
+        }
+        return getStatistics(years)
+    },
     ratioHybrids: undefined,
+    get ratioHybrids() {
+        var numHyb = 0
+        for (var i = 0; i < mpg_data.length; i++) {
+            if(mpg_data[i].hybrid) {
+                numHyb += 1
+            }
+        }
+        return numHyb/mpg_data.length
+    }
+
 };
+
+
 
 
 /**

@@ -162,6 +162,7 @@ function getHybrids() {
             tmp.push({make: hybrids[i].make, hybrids: ids})
         } else {
             var idx = tmp.findIndex(element => element.make === hybrids[i].make)
+            console.log(idx)
             tmp[idx].hybrids.push(hybrids[i].id)
         }
     }

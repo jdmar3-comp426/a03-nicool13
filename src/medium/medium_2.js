@@ -173,7 +173,7 @@ function getHybrids() {
             return 1
         }
     })
-    console.log(tmp)
+    //console.log(tmp)
     return tmp 
 }
 

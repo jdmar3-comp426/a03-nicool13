@@ -223,6 +223,8 @@ function getAvgMpgByYearAndHybrid() {
 
             years.mpg_data[i].year = year
 
+            
+
             //Object.defineProperty(ans, mpg_data[i].year, {value: year, enumerable: true})
 
 
@@ -231,6 +233,6 @@ function getAvgMpgByYearAndHybrid() {
         }
     }
 
-    return ans
+    return years
 
 } 

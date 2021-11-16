@@ -229,7 +229,7 @@ function getAvgMpgByYearAndHybrid() {
 
 
         } else {
-            Object.defineProperty(years, mpg_data[i].year, {enumarable: true})
+            Object.defineProperty(years, mpg_data[i].year, {enumarable: true, writable: true})
         }
     }
 

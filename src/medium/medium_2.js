@@ -157,11 +157,11 @@ function getHybrids() {
     var hybrids = mpg_data.filter(r => r.hybrid)
     var tmp = []
     for (var i = 0; i < hybrids.length; i++) {
-        if (tmp.forEach(this.make != hybrids[i].make)) {
+        if (tmp.forEach(make != hybrids[i].make)) {
             var ids = [hybrids[i].id]
             tmp.push({make: hybrids[i].make, hybrids: ids})
         } else {
-            idx = tmp.findIndex(this.make == hybrids[i].make)
+            idx = tmp.findIndex(make == hybrids[i].make)
             tmp[idx].hybrids.push(hybrids[i].id)
         }
     }

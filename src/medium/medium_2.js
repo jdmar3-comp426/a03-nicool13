@@ -155,6 +155,7 @@ export const moreStats = {
 
 function getHybrids() {
     var hybrids = mpg_data.filter(r => r.hybrid)
+    return hybrids
     var tmp = []
     for (var i = 0; i < hybrids.length; i++) {
         if (tmp.forEach(element => element.make !== hybrids[i].make)) {
@@ -162,7 +163,6 @@ function getHybrids() {
             tmp.push({make: hybrids[i].make, hybrids: ids})
         } else {
             var idx = tmp.findIndex(element => element.make === hybrids[i].make)
-            console.log(idx)
             tmp[idx].hybrids.push(hybrids[i].id)
         }
     }

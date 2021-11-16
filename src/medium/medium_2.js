@@ -2,6 +2,7 @@ import mpg_data from "./data/mpg_data.js";
 import {getStatistics} from "./medium_1.js";
 import { maxAndMin } from "../mild/mild_1.js";
 
+
 /*
 This section can be done by using the array prototype functions.
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
@@ -156,11 +157,11 @@ function getHybrids() {
     var hybrids = mpg_data.filter(r => r.hybrid)
     var tmp = []
     for (var i = 0; i < hybrids.length; i++) {
-        if (tmp.prototype.forEach(this.make != hybrids[i].make)) {
+        if (tmp.forEach(this.make != hybrids[i].make)) {
             var ids = [hybrids[i].id]
             tmp.push({make: hybrids[i].make, hybrids: ids})
         } else {
-            idx = tmp.prototype.findIndex(this.make == hybrids[i].make)
+            idx = tmp.findIndex(this.make == hybrids[i].make)
             tmp[idx].hybrids.push(hybrids[i].id)
         }
     }

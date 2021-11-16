@@ -155,19 +155,19 @@ export const moreStats = {
 };
 
 function getHybrids() {
-    var hybrids = mpg_data.filter(r => r.hybrid)
+    var hs = mpg_data.filter(r => r.hybrid)
     var tmp = []
-    for (var i = 0; i < hybrids.length; i++) {
-        if (tmp.every(element => element.make !== hybrids[i].make) || tmp.length == 0) {
-            var ids = [hybrids[i].id]
-            tmp.push({make: hybrids[i].make, hybrids: ids})
+    for (var i = 0; i < hs.length; i++) {
+        if (tmp.every(element => element.make !== hs[i].make) || tmp.length == 0) {
+            var ids = [hs[i].id]
+            tmp.push({make: hs[i].make, hybrids: ids})
         } else {
-            var idx = tmp.findIndex(element => element.make === hybrids[i].make)
-            tmp[idx].hybrids.push(hybrids[i].id)
+            var idx = tmp.findIndex(element => element.make === hs[i].make)
+            tmp[idx].hybrids.push(hs[i].id)
         }
     }
     tmp.sort(function(a, b) {
-        if (a.hybrids.length > b.hybrids.length) {
+        if (a.hybrids.length >= b.hybrids.length) {
             return -1
         } else {
             return 1
@@ -180,9 +180,12 @@ function getHybrids() {
 
 function getAvgMpgByYearAndHybrid() {
     var years = new Object()
-    var ans = new Object()
+    //var ans = new Object()
     for (var i = 0; i < mpg_data.length; i++) {
         if (years.hasOwnProperty(mpg_data[i].year)) {
+
+        } else {
+
             var curYearData = mpg_data.filter(elt => elt.year === mpg_data[i].year)
                         
             var hcity = 0
@@ -211,28 +214,22 @@ function getAvgMpgByYearAndHybrid() {
             nhhighway = nhhighway / nonhybs
 
             var hybrid = new Object()
-            Object.defineProperties(hybrid, {"city": {value: hcity, enumarable: true}, 
-            "highway": {value: hhighway, enumarable: true}})
+            Object.defineProperties(hybrid, {"city": {value: hcity, enumerable: true}, 
+            "highway": {value: hhighway, enumerable: true}})
             var notHybrid = new Object()
-            Object.defineProperties(notHybrid, {"city": {value: nhcity, enumarable: true}, 
-            "highway": {value: nhhighway, enumarable: true}})
+            Object.defineProperties(notHybrid, {"city": {value: nhcity, enumerable: true}, 
+            "highway": {value: nhhighway, enumerable: true}})
 
             var year = new Object()
-            Object.defineProperties(year, {"hybrid": {value: hybrid, enumarable: true},
-            "notHybrid": {value: notHybrid, enumarable: true}})
-
-            years[mpg_data[i].year] = year
-
-            
-
-            //Object.defineProperty(ans, mpg_data[i].year, {value: year, enumerable: true})
+            Object.defineProperties(year, {"hybrid": {value: hybrid, enumerable: true},
+            "notHybrid": {value: notHybrid, enumerable: true}})
 
 
-        } else {
-            Object.defineProperty(years, mpg_data[i].year, {enumarable: true, writable: true})
+            Object.defineProperty(years, mpg_data[i].year, {value: year, enumerable: true})
+            //console.log(years)
         }
     }
-
+    //console.log(years)
     return years
 
 } 

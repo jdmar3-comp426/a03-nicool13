@@ -151,14 +151,14 @@ function getRatio() {
 export const moreStats = {
     makerHybrids: getHybrids(),
     avgMpgByYearAndHybrid: getAvgMpgByYearAndHybrid()
+    
 };
 
 function getHybrids() {
     var hybrids = mpg_data.filter(r => r.hybrid)
-    return hybrids
     var tmp = []
     for (var i = 0; i < hybrids.length; i++) {
-        if (tmp.forEach(element => element.make !== hybrids[i].make)) {
+        if (tmp.every(element => element.make !== hybrids[i].make) || tmp.length == 0) {
             var ids = [hybrids[i].id]
             tmp.push({make: hybrids[i].make, hybrids: ids})
         } else {
@@ -173,44 +173,62 @@ function getHybrids() {
             return 1
         }
     })
+    console.log(tmp)
     return tmp 
 }
 
 
 function getAvgMpgByYearAndHybrid() {
     var years = new Object()
-    var hybs = 0
-    var nonhybs = 0
-    for (var i = 0; i < mpg_data; i++) {
+    var ans = new Object()
+    for (var i = 0; i < mpg_data.length; i++) {
         if (years.hasOwnProperty(mpg_data[i].year)) {
-            if (mpg_data[i].hybrid) {
-                hybs += 1
-                years[mpg_data[i].year].hybrid.city += mpg_data[i].city_mpg
-                years[mpg_data[i].year].hybrid.highway += mpg_data[i].highway_mpg
-            } else {
-                nonhybs += 1
-                years[mpg_data[i].year].notHybrid.city += mpg_data[i].city_mpg
-                years[mpg_data[i].year].notHybrid.highway += mpg_data[i].highway_mpg
+            var curYearData = mpg_data.filter(elt => elt.year === mpg_data[i].year)
+                        
+            var hcity = 0
+            var nhcity = 0
+            var hhighway = 0
+            var nhhighway = 0
+
+            var hybs = 0
+            var nonhybs = 0
+
+            for (var j = 0; j < curYearData.length; j++) {
+                if (curYearData[j].hybrid) {
+                    hybs += 1
+                    hcity += curYearData[j].city_mpg
+                    hhighway += curYearData[j].highway_mpg
+                } else {
+                    nonhybs += 1
+                    nhcity += curYearData[j].city_mpg
+                    nhhighway += curYearData[j].highway_mpg
+                }
             }
+
+            hcity = hcity / hybs
+            hhighway = hhighway / hybs
+            nhcity = nhcity / nonhybs
+            nhhighway = nhhighway / nonhybs
+
+            var hybrid = new Object()
+            Object.defineProperties(hybrid, {"city": {value: hcity, enumarable: true}, 
+            "highway": {value: hhighway, enumarable: true}})
+            var notHybrid = new Object()
+            Object.defineProperties(notHybrid, {"city": {value: nhcity, enumarable: true}, 
+            "highway": {value: nhhighway, enumarable: true}})
+
+            var year = new Object()
+            Object.defineProperties(year, {"hybrid": {value: hybrid, enumarable: true},
+            "notHybrid": {value: notHybrid, enumarable: true}})
+
+            Object.defineProperty(ans, mpg_data[i].year, {value: year, enumerable: true})
+
+
         } else {
-            if (mpg_data[i].hybrid) {
-                hybs += 1
-                years[mpg_data[i].year] = {hybrid: {city: mpg_data[i].city_mpg, highway: mpg_data[i].highway_mpg}, notHybrid: {city: 0, highway: 0}}
-            } else {
-                nonhybs += 1
-                years[mpg_data[i].year] = {hybrid: {city: 0, highway: 0}, notHybrid: {city: mpg_data[i].city_mpg, highway: mpg_data[i].highway_mpg}}
-            }
+            Object.defineProperty(years, mpg_data[i].year, {enumerable: true})
         }
     }
-    years.forEach(
-        makeaverages(this) 
-    )
-    return years
-}
 
-function makeaverages(year) {
-    year.hybrid.city = year.hybrid.city / hybs
-    year.hybrid.highway = year.hybrid.highway / hybs
-    year.notHybrid.city = year.notHybrid.city / nonhybs
-    year.notHybrid.highway = year.notHybrid.highway / nonhybs
-}
+    return ans
+
+} 

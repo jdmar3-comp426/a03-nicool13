@@ -202,7 +202,7 @@ function getAvgMpgByYearAndHybrid() {
             }
         }
     }
-    years.prototype.forEach(
+    years.forEach(
         makeaverages(this) 
     )
     return years

@@ -153,7 +153,7 @@ export const moreStats = {
 };
 
 function getHybrids() {
-    var hybrids = mpg_data.prototype.filter(r => r.hybrid)
+    var hybrids = mpg_data.filter(r => r.hybrid)
     var tmp = []
     for (var i = 0; i < hybrids.length; i++) {
         if (tmp.prototype.forEach(this.make != hybrids[i].make)) {

@@ -221,7 +221,7 @@ function getAvgMpgByYearAndHybrid() {
             Object.defineProperties(year, {"hybrid": {value: hybrid, enumarable: true},
             "notHybrid": {value: notHybrid, enumarable: true}})
 
-            years.mpg_data[i].year = year
+            years[mpg_data[i].year] = year
 
             
 

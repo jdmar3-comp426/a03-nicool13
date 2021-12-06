@@ -1,3 +1,5 @@
+
+
 /**
  *
  * @param {number} a
@@ -9,7 +11,9 @@
  * see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
  */
 export function sumToString(a, b) {
-
+    var sum = a+b
+    var str = a + " + " + b + " = " + sum
+    return str
 }
 
 
@@ -24,7 +28,11 @@ export function sumToString(a, b) {
  *
  */
 export function getIncreasingArray(startNumber, endNumber) {
-
+    var arr = new Array(endNumber-startNumber+1)
+    for (var i = startNumber; i <= endNumber; i++) {
+        arr[i-startNumber] = i    
+    }
+    return arr
 }
 
 /**
@@ -35,7 +43,18 @@ export function getIncreasingArray(startNumber, endNumber) {
  * and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math
  */
 export function maxAndMin(numbers) {
-
+    var maxi = numbers[0]
+    var mini = numbers[0]
+    for (var i = 1; i< numbers.length; i++) {
+        if (numbers[i] > maxi) {
+            maxi = numbers[i]
+        }
+        if (numbers[i] < mini) {
+            mini = numbers[i]
+        } 
+    }
+    var ans = {max: Number(maxi), min: Number(mini)}
+    return ans
 }
 
 /**
@@ -49,5 +68,27 @@ export function maxAndMin(numbers) {
  *
  */
 export function countArray(array) {
-
+    var unique = [] 
+    for (var i = 0; i < array.length; i++) {
+        if (unique.includes(array[i]) == false) {
+            unique.push(array[i])
+        }
+    }
+    
+    var counts = new Array(unique.length).fill(0)
+    
+    for (var j = 0; j < unique.length; j++) {
+        for (var k = 0; k < array.length; k++) {
+            if (unique[j] == array[k]) {
+                counts[j] += 1
+            }
+        }
+    }
+    
+    var ans = {}
+    for (var i = 0; i < counts.length; i++) {
+        var key = String(unique[i])
+        Object.defineProperty(ans, key, {value: counts[i], enumerable: true})
+    }
+    return ans
 }

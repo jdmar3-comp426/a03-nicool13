@@ -1,5 +1,7 @@
 import mpg_data from "./data/mpg_data.js";
 import {getStatistics} from "./medium_1.js";
+import { maxAndMin } from "../mild/mild_1.js";
+
 
 /*
 This section can be done by using the array prototype functions.
@@ -20,10 +22,73 @@ see under the methods section
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
 export const allCarStats = {
-    avgMpg: undefined,
-    allYearStats: undefined,
-    ratioHybrids: undefined,
+    avgMpg: getAvgMpg(),
+    /*
+    get avgMpg() {
+        var citySum = 0
+        var hwaySum = 0
+        for (var i = 0; i < mpg_data.length; i++) {
+            citySum += mpg_data[i].city_mpg
+            hwaySum += mpg_data[i].highway_mpg
+        }
+        var cityavg = citySum / mpg_data.length
+        var hwayavg = hwaySum / mpg_data.length
+        return {city: cityavg, highway: hwayavg}
+    },
+    */
+    allYearStats: getYearStats(),
+    /*
+    get allYearStats() {
+        var years = []
+        for (var i = 0; i < mpg_data.length; i++) {
+            years.push(mpg_data[i].year)
+        }
+        return getStatistics(years)
+    },
+    */
+    ratioHybrids: getRatio(),
+    /*
+    get ratioHybrids() {
+        var numHyb = 0
+        for (var i = 0; i < mpg_data.length; i++) {
+            if(mpg_data[i].hybrid) {
+                numHyb += 1
+            }
+        }
+        return numHyb/mpg_data.length
+    }
+    */
 };
+
+function getAvgMpg() {
+    var citySum = 0
+        var hwaySum = 0
+        for (var i = 0; i < mpg_data.length; i++) {
+            citySum += mpg_data[i].city_mpg
+            hwaySum += mpg_data[i].highway_mpg
+        }
+        var cityavg = citySum / mpg_data.length
+        var hwayavg = hwaySum / mpg_data.length
+        return {city: cityavg, highway: hwayavg}
+}
+
+function getYearStats() {
+    var years = []
+        for (var i = 0; i < mpg_data.length; i++) {
+            years.push(mpg_data[i].year)
+        }
+        return getStatistics(years)
+}
+
+function getRatio() {
+    var numHyb = 0
+        for (var i = 0; i < mpg_data.length; i++) {
+            if(mpg_data[i].hybrid) {
+                numHyb += 1
+            }
+        }
+        return numHyb/mpg_data.length
+}
 
 
 /**
@@ -84,6 +149,87 @@ export const allCarStats = {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: getHybrids(),
+    avgMpgByYearAndHybrid: getAvgMpgByYearAndHybrid()
+    
 };
+
+function getHybrids() {
+    var hs = mpg_data.filter(r => r.hybrid)
+    var tmp = []
+    for (var i = 0; i < hs.length; i++) {
+        if (tmp.every(element => element.make !== hs[i].make) || tmp.length == 0) {
+            var ids = [hs[i].id]
+            tmp.push({make: hs[i].make, hybrids: ids})
+        } else {
+            var idx = tmp.findIndex(element => element.make === hs[i].make)
+            tmp[idx].hybrids.push(hs[i].id)
+        }
+    }
+    tmp.sort(function(a, b) {
+        if (a.hybrids.length >= b.hybrids.length) {
+            return -1
+        } else {
+            return 1
+        }
+    })
+    //console.log(tmp)
+    return tmp 
+}
+
+
+function getAvgMpgByYearAndHybrid() {
+    var years = new Object()
+    //var ans = new Object()
+    for (var i = 0; i < mpg_data.length; i++) {
+        if (years.hasOwnProperty(mpg_data[i].year)) {
+
+        } else {
+
+            var curYearData = mpg_data.filter(elt => elt.year === mpg_data[i].year)
+                        
+            var hcity = 0
+            var nhcity = 0
+            var hhighway = 0
+            var nhhighway = 0
+
+            var hybs = 0
+            var nonhybs = 0
+
+            for (var j = 0; j < curYearData.length; j++) {
+                if (curYearData[j].hybrid) {
+                    hybs += 1
+                    hcity += curYearData[j].city_mpg
+                    hhighway += curYearData[j].highway_mpg
+                } else {
+                    nonhybs += 1
+                    nhcity += curYearData[j].city_mpg
+                    nhhighway += curYearData[j].highway_mpg
+                }
+            }
+
+            hcity = hcity / hybs
+            hhighway = hhighway / hybs
+            nhcity = nhcity / nonhybs
+            nhhighway = nhhighway / nonhybs
+
+            var hybrid = new Object()
+            Object.defineProperties(hybrid, {"city": {value: hcity, enumerable: true}, 
+            "highway": {value: hhighway, enumerable: true}})
+            var notHybrid = new Object()
+            Object.defineProperties(notHybrid, {"city": {value: nhcity, enumerable: true}, 
+            "highway": {value: nhhighway, enumerable: true}})
+
+            var year = new Object()
+            Object.defineProperties(year, {"hybrid": {value: hybrid, enumerable: true},
+            "notHybrid": {value: notHybrid, enumerable: true}})
+
+
+            Object.defineProperty(years, mpg_data[i].year, {value: year, enumerable: true})
+            //console.log(years)
+        }
+    }
+    //console.log(years)
+    return years
+
+} 
